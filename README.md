@@ -4,7 +4,7 @@ These are queries to help assist with retrieving users inside of a SQL instance 
 
 ## **Oracle - Users and Account Status**
 
-The following queries have been designed to **NOT** pull password hashes out of the DBS_USERS table.  Due to differences between Oracle database versions please run the query that is appropriate to your environment.
+The following queries have been designed to **NOT** pull password hashes out of the DBA_USERS table.  Due to differences in table structure between Oracle versions please run the query that is appropriate to your environment.
 
 ### ORACLE ***18***
 
