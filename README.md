@@ -6,7 +6,7 @@ These are queries to help assist with retrieving users inside of a SQL instance 
 
 The following queries have been designed to **NOT** pull password hashes out of the DBA_USERS table.  Due to differences in table structure between Oracle versions please run the query that is appropriate to your environment.
 
-### ORACLE ***18***
+### ORACLE ***12c Release 2 (12.2.0.1) and newer***
 
 ``` SQL
     SELECT USERNAME, USER_ID, ACCOUNT_STATUS, LOCK_DATE,
@@ -16,13 +16,13 @@ The following queries have been designed to **NOT** pull password hashes out of 
     FROM DBA_USERS
 ```
 
-### ORACLE ***12***
+### ORACLE ***12 less than 12c Release 2 (12.2.0.1)***
 
 ``` SQL
     SELECT USERNAME, USER_ID, ACCOUNT_STATUS, LOCK_DATE,
         EXPIRY_DATE, CREATED, EXTERNAL_NAME, PASSWORD_VERSIONS,
         EDITIONS_ENABLED, AUTHENTICATION_TYPE, PROXY_ONLY_CONNECT,
-        COMMON, LAST_LOGIN, ORACLE_MAINTAINED, INHERITED, IMPLICIT
+        COMMON, LAST_LOGIN, ORACLE_MAINTAINED
     FROM DBA_USERS
 ```
 
