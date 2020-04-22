@@ -17,7 +17,7 @@ FROM product_component_version
 
 ## ***Password Settings***
 
-This command will show all accounts and the password settings that are being applied to them.
+The following query will show the password settings for the default profile.
 
 ``` SQL
 SELECT *
