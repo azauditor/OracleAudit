@@ -15,6 +15,17 @@ SELECT *
 FROM product_component_version
 ```
 
+## ***Password Settings***
+
+This command will show all accounts and the password settings that are being applied to them.
+
+``` SQL
+SELECT *
+FROM DBA_PROFILES
+WHERE PROFILE = 'DEFAULT'
+AND RESOURCE_TYPE = 'PASSWORD'
+```
+
 ## **Oracle - Users and Account Status**
 
 The following queries have been designed to **NOT** pull password hashes out of the DBA_USERS table.  Due to differences in table structure between Oracle versions please run the query that is appropriate to your environment.
