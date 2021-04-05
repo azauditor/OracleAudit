@@ -17,13 +17,13 @@ FROM product_component_version
 
 ## ***Password Settings***
 
-The following query will show the password settings for the default profile.
+The following query will show the password settings for all profiles in the database.
 
 ``` SQL
 SELECT *
 FROM DBA_PROFILES
-WHERE PROFILE = 'DEFAULT'
-AND RESOURCE_TYPE = 'PASSWORD'
+WHERE RESOURCE_TYPE = 'PASSWORD'
+ORDER BY PROFILE
 ```
 
 ## **Oracle - Users and Account Status**
