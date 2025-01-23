@@ -26,7 +26,7 @@ FROM V$INSTANCE
 The following query will show the password settings for all profiles in the database.
 
 ``` SQL
-SELECT PROFILE, RESOURCE_NAME, LIMIT
+SELECT PROFILE, RESOURCE_NAME, [LIMIT]
 FROM DBA_PROFILES
 WHERE RESOURCE_TYPE = 'PASSWORD'
 ORDER BY PROFILE
