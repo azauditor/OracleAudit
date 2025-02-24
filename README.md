@@ -34,11 +34,11 @@ ORDER BY PROFILE
 
 ## **Oracle - Users and Account Status**
 
-The following queries have been designed to **NOT** pull password hashes out of the DBA_USERS table.  Due to differences in table structure between Oracle versions please run the query that is appropriate to your environment.
+The following query has been designed to **NOT** pull password hashes out of the DBA_USERS table.
 
 ``` SQL
 SELECT USERNAME, USER_ID, PROFILE, ACCOUNT_STATUS, LOCK_DATE,
-    EXPIRY_DATE, EDITIONS_ENABLED, AUTHENTICATION_TYPE
+    EXPIRY_DATE, LAST_LOGIN, ORACLE_MAINTAINED
 FROM DBA_USERS
 ```
 
@@ -74,6 +74,6 @@ FROM DBA_ROLES
 The following query determines what users are granted SYSDBA, SYSOPER, SYSASM, SYSBACKUP, SYSDG, and SYSKM privileges.
 
 ``` SQL
-SELECT USERNAME, SYSDBA, SYSOPER, SYSKM, SYSDG, SYSASM, SYSBACKUP
+SELECT USERNAME, SYSDBA, SYSOPER, SYSBACKUP, SYSKM, SYSDG, SYSASM
 FROM V$PWFILE_USERS
 ```
