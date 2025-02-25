@@ -15,12 +15,18 @@ SELECT *
 FROM product_component_version
 ```
 
+``` SQL
+SELECT INSTANCE_NAME, HOST_NAME, VERSION, STATUS, LOGINS,
+    DATABASE_STATUS, INSTANCE_ROLE, CON_ID
+FROM V$INSTANCE
+```
+
 ## ***Password Settings***
 
 The following query will show the password settings for all profiles in the database.
 
 ``` SQL
-SELECT *
+SELECT PROFILE, RESOURCE_NAME, LIMIT
 FROM DBA_PROFILES
 WHERE RESOURCE_TYPE = 'PASSWORD'
 ORDER BY PROFILE
@@ -28,50 +34,11 @@ ORDER BY PROFILE
 
 ## **Oracle - Users and Account Status**
 
-The following queries have been designed to **NOT** pull password hashes out of the DBA_USERS table.  Due to differences in table structure between Oracle versions please run the query that is appropriate to your environment.
-
-### ORACLE ***12c Release 2 (12.2.0.1) and newer***
+The following query has been designed to **NOT** pull password hashes out of the DBA_USERS table.
 
 ``` SQL
 SELECT USERNAME, USER_ID, PROFILE, ACCOUNT_STATUS, LOCK_DATE,
-    EXPIRY_DATE, CREATED, EXTERNAL_NAME, PASSWORD_VERSIONS,
-    EDITIONS_ENABLED, AUTHENTICATION_TYPE, PROXY_ONLY_CONNECT,
-    COMMON, LAST_LOGIN, ORACLE_MAINTAINED, INHERITED, IMPLICIT
-FROM DBA_USERS
-```
-
-### ORACLE ***12 less than 12c Release 2 (12.2.0.1)***
-
-``` SQL
-SELECT USERNAME, USER_ID, PROFILE, ACCOUNT_STATUS, LOCK_DATE,
-    EXPIRY_DATE, CREATED, EXTERNAL_NAME, PASSWORD_VERSIONS,
-    EDITIONS_ENABLED, AUTHENTICATION_TYPE, PROXY_ONLY_CONNECT,
-    COMMON, LAST_LOGIN, ORACLE_MAINTAINED
-FROM DBA_USERS
-```
-
-### ORACLE ***11***
-
-``` SQL
-SELECT USERNAME, USER_ID, PROFILE, ACCOUNT_STATUS, LOCK_DATE,
-    EXPIRY_DATE, CREATED, EXTERNAL_NAME, PASSWORD_VERSIONS,
-    EDITIONS_ENABLED, AUTHENTICATION_TYPE
-FROM DBA_USERS
-```
-
-### ORACLE ***10***
-
-``` SQL
-SELECT USERNAME, USER_ID, PROFILE, ACCOUNT_STATUS, LOCK_DATE,
-    EXPIRY_DATE, CREATED, EXTERNAL_NAME
-FROM DBA_USERS
-```
-
-### ORACLE ***9***
-
-``` SQL
-SELECT USERNAME, USER_ID,PROFILE, ACCOUNT_STATUS, LOCK_DATE,
-    EXPIRY_DATE, CREATED, EXTERNAL_NAME
+    EXPIRY_DATE, LAST_LOGIN, ORACLE_MAINTAINED
 FROM DBA_USERS
 ```
 
@@ -80,7 +47,7 @@ FROM DBA_USERS
 The following query determines what System Privileges allow the user to perform system level activities.
 
 ``` SQL
-SELECT *
+SELECT GRANTEE, PRIVILEGE, ADMIN_OPTION
 FROM DBA_SYS_PRIVS
 ```
 
@@ -89,7 +56,7 @@ FROM DBA_SYS_PRIVS
 The following query lists the roles granted to all users and roles in the database.
 
 ``` SQL
-SELECT *
+SELECT GRANTEE, GRANTED_ROLE, ADMIN_OPTION
 FROM DBA_ROLE_PRIVS
 ```
 
@@ -98,7 +65,7 @@ FROM DBA_ROLE_PRIVS
 The following query lists all roles that exist in the database.
 
 ``` SQL
-SELECT *
+SELECT ROLE, ROLE_ID, PASSWORD_REQUIRED, AUTHENTICATION_TYPE, ORACLE_MAINTAINED
 FROM DBA_ROLES
 ```
 
@@ -107,6 +74,6 @@ FROM DBA_ROLES
 The following query determines what users are granted SYSDBA, SYSOPER, SYSASM, SYSBACKUP, SYSDG, and SYSKM privileges.
 
 ``` SQL
-SELECT *
+SELECT USERNAME, SYSDBA, SYSOPER, SYSBACKUP, SYSKM, SYSDG, SYSASM
 FROM V$PWFILE_USERS
 ```
