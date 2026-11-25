@@ -6,17 +6,17 @@ These are queries to help assist with retrieving users inside of a SQL instance 
 The following queries may assist you in determining your version of Oracle database if you are unsure. The version of the database will impact the queries you will need to run for "Users and Account Status", listed further below.
 
 ``` SQL
-SELECT * 
+SELECT 'Oracle/Version' as ScriptName, * 
 FROM v$version
 ```
 
 ``` SQL
-SELECT * 
+SELECT 'Oracle/PCV' as ScriptName, * 
 FROM product_component_version
 ```
 
 ``` SQL
-SELECT INSTANCE_NAME, HOST_NAME, VERSION, STATUS, LOGINS,
+SELECT 'Oracle/Instance' as ScriptName, INSTANCE_NAME, HOST_NAME, VERSION, STATUS, LOGINS,
     DATABASE_STATUS, INSTANCE_ROLE, CON_ID
 FROM V$INSTANCE
 ```
@@ -26,7 +26,7 @@ FROM V$INSTANCE
 The following query will show the password settings for all profiles in the database.
 
 ``` SQL
-SELECT PROFILE, RESOURCE_NAME, LIMIT
+SELECT 'Oracle/Password Settings' as ScriptName, PROFILE, RESOURCE_NAME, LIMIT
 FROM DBA_PROFILES
 WHERE RESOURCE_TYPE = 'PASSWORD'
 ORDER BY PROFILE
@@ -37,7 +37,7 @@ ORDER BY PROFILE
 The following query has been designed to **NOT** pull password hashes out of the DBA_USERS table.
 
 ``` SQL
-SELECT USERNAME, USER_ID, PROFILE, ACCOUNT_STATUS, LOCK_DATE,
+SELECT 'Oracle/User Account Status' as ScriptName, USERNAME, USER_ID, PROFILE, ACCOUNT_STATUS, LOCK_DATE,
     EXPIRY_DATE, LAST_LOGIN, ORACLE_MAINTAINED
 FROM DBA_USERS
 ```
@@ -47,7 +47,7 @@ FROM DBA_USERS
 The following query determines what System Privileges allow the user to perform system level activities.
 
 ``` SQL
-SELECT GRANTEE, PRIVILEGE, ADMIN_OPTION
+SELECT 'Oracle/System Privilege Grants' as ScriptName, GRANTEE, PRIVILEGE, ADMIN_OPTION
 FROM DBA_SYS_PRIVS
 ```
 
@@ -56,7 +56,7 @@ FROM DBA_SYS_PRIVS
 The following query lists the roles granted to all users and roles in the database.
 
 ``` SQL
-SELECT GRANTEE, GRANTED_ROLE, ADMIN_OPTION
+SELECT 'Oracle/Role Grants' as ScriptName, GRANTEE, GRANTED_ROLE, ADMIN_OPTION
 FROM DBA_ROLE_PRIVS
 ```
 
@@ -65,15 +65,15 @@ FROM DBA_ROLE_PRIVS
 The following query lists all roles that exist in the database.
 
 ``` SQL
-SELECT ROLE, ROLE_ID, PASSWORD_REQUIRED, AUTHENTICATION_TYPE, ORACLE_MAINTAINED
+SELECT 'Oracle/Roles' as ScriptName, ROLE, ROLE_ID, PASSWORD_REQUIRED, AUTHENTICATION_TYPE, ORACLE_MAINTAINED
 FROM DBA_ROLES
 ```
 
-## **Oracle - Users Granted SYSDBA or SYSOPER**
+## **Oracle - PW_File Users**
 
 The following query determines what users are granted SYSDBA, SYSOPER, SYSASM, SYSBACKUP, SYSDG, and SYSKM privileges.
 
 ``` SQL
-SELECT USERNAME, SYSDBA, SYSOPER, SYSBACKUP, SYSKM, SYSDG, SYSASM
+SELECT 'Oracle/PWFile' as ScriptName, USERNAME, SYSDBA, SYSOPER, SYSBACKUP, SYSKM, SYSDG, SYSASM
 FROM V$PWFILE_USERS
 ```
